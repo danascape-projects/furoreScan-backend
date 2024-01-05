@@ -7,8 +7,8 @@ valid_username = "user123"
 valid_password = "password123"
 
 attendees = {
-    "123": {"name": "John Doe", "attended": False},
-    "23": {"name": "John Doe", "attended": False},
+    "123": {"name": "John Doe", "day1": False, "day2": False},
+    "23": {"name": "John Doe", "day2": False, "day2": False},
     # Add more attendees
 }
 
@@ -32,7 +32,8 @@ async def login(
 @app.post('/check-in')
 async def check_in(attendee_id: str):
     if attendee_id in attendees:
-        attendees[attendee_id]['attended'] = True
+        attendees[attendee_id]['day1'] = True
+        attendees[attendee_id]['day2'] = True
         return {'detail': True}
     else:
         raise HTTPException(status_code=404, detail='Attendee not found') 
