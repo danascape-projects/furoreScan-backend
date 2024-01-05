@@ -6,6 +6,12 @@ app = FastAPI()
 valid_username = "user123"
 valid_password = "password123"
 
+attendees = {
+    "123": {"name": "John Doe", "attended": False},
+    "23": {"name": "John Doe", "attended": False},
+    # Add more attendees
+}
+
 @app.get("/")
 def read_hello():
     content = {"message": "Hello, World!"}
@@ -22,3 +28,11 @@ async def login(
         return JSONResponse(content=content)
     else:
         raise HTTPException(status_code=401, detail="Invalid credentials")
+    
+@app.post('/check-in')
+async def check_in(attendee_id: str):
+    if attendee_id in attendees:
+        attendees[attendee_id]['attended'] = True
+        return {'detail': True}
+    else:
+        raise HTTPException(status_code=404, detail='Attendee not found') 
