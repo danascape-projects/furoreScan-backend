@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException, Form, Query
 from fastapi.responses import JSONResponse
+import json
 
 app = FastAPI()
 
@@ -11,6 +12,12 @@ attendees = {
     "23": {"name": "John Doe", "day2": False, "day2": False},
     # Add more attendees
 }
+
+try:
+    with open("attendees.json", "r") as file:
+        attendees = json.load(file)
+except FileNotFoundError:
+    attendees = {}
 
 @app.get("/")
 def read_hello():
@@ -37,6 +44,10 @@ async def check_in(attendee_id: str):
 
         attendees[attendee_id]['day1'] = True
         attendees[attendee_id]['day2'] = True
-        return {'detail': True}
+
+        with open("attendees.json", "w") as file:
+            json.dump(attendees, file, indent=2)
+            
+        return {'success': True, 'message': 'Check-in successful for day1 and day2', 'attendee': attendees[attendee_id]}
     else:
         raise HTTPException(status_code=404, detail='Attendee not found') 
