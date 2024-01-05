@@ -32,6 +32,9 @@ async def login(
 @app.post('/check-in')
 async def check_in(attendee_id: str):
     if attendee_id in attendees:
+        if attendees[attendee_id].get('day1', False) or attendees[attendee_id].get('day2', False):
+            return {'success': False, 'message': 'Attendee has already attended'}
+
         attendees[attendee_id]['day1'] = True
         attendees[attendee_id]['day2'] = True
         return {'detail': True}
