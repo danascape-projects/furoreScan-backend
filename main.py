@@ -18,15 +18,27 @@ def read_hello():
 @app.post('/check-in')
 async def check_in(attendee_id: str):
     if attendee_id in attendees:
-        if attendees[attendee_id].get('day1', False) or attendees[attendee_id].get('day2', False):
+        if attendees[attendee_id].get('day1', False) and attendees[attendee_id].get('day2', False):
             return {'success': False, 'message': 'Attendee has already attended'}
 
-        attendees[attendee_id]['day1'] = True
-        attendees[attendee_id]['day2'] = True
+        if not attendees[attendee_id].get('day1', False):
+            attendees[attendee_id]['day1'] = True
+            
+            with open("attendees.json", "w") as file:
+                json.dump(attendees, file, indent=2)
 
-        with open("attendees.json", "w") as file:
-            json.dump(attendees, file, indent=2)
+            return {'success': True, 'message': 'Check-in successful for day1', 'attendee': attendees[attendee_id]}
 
-        return {'success': True, 'message': 'Check-in successful for day1 and day2', 'attendee': attendees[attendee_id]}
+
+        if not attendees[attendee_id].get('day2', False):
+            attendees[attendee_id]['day2'] = True
+
+            with open("attendees.json", "w") as file:
+                json.dump(attendees, file, indent=2)
+
+            return {'success': True, 'message': 'Check-in successful for day2', 'attendee': attendees[attendee_id]}
+
+
+        # return {'success': True, 'message': 'Check-in successful for day1 and day2', 'attendee': attendees[attendee_id]}
     else:
         raise HTTPException(status_code=404, detail='Attendee not found') 
