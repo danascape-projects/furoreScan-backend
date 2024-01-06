@@ -19,7 +19,7 @@ def read_hello():
 async def check_in(attendee_id: str):
     if attendee_id in attendees:
         if attendees[attendee_id].get('day1', False) and attendees[attendee_id].get('day2', False):
-            return {'success': False, 'message': 'Attendee has already attended'}
+            return {'detail': False, 'message': 'Attendee has already attended', 'attendee': attendee_id}
 
         if not attendees[attendee_id].get('day1', False):
             attendees[attendee_id]['day1'] = True
@@ -27,7 +27,7 @@ async def check_in(attendee_id: str):
             with open("attendees.json", "w") as file:
                 json.dump(attendees, file, indent=2)
 
-            return {'success': True, 'message': 'Check-in successful for day1', 'attendee': attendees[attendee_id]}
+            return {'detail': True, 'message': 'day1', 'attendee': attendee_id}
 
 
         if not attendees[attendee_id].get('day2', False):
@@ -36,7 +36,7 @@ async def check_in(attendee_id: str):
             with open("attendees.json", "w") as file:
                 json.dump(attendees, file, indent=2)
 
-            return {'success': True, 'message': 'Check-in successful for day2', 'attendee': attendees[attendee_id]}
+            return {'detail': True, 'message': 'day2', 'attendee': attendee_id}
 
 
         # return {'success': True, 'message': 'Check-in successful for day1 and day2', 'attendee': attendees[attendee_id]}
