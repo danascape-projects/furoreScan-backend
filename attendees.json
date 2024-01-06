@@ -1,12 +1,10 @@
 {
   "123": {
-    "name": "John Doe",
-    "day1": true,
-    "day2": true
+    "day1": false,
+    "day2": false
   },
   "23": {
-    "name": "Jane Doe",
-    "day1": true,
-    "day2": true
+    "day1": false,
+    "day2": false
   }
 }
