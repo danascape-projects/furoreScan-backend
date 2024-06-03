@@ -37,7 +37,7 @@ pdf.set_font('Arial', 'B', 12)
 pdf.cell(0, 10, 'QR Codes for Encrypted JSON Data', 0, 1, 'C')
 
 # Loop to create JSON entries, encrypt, generate QR code, and add to PDF
-for i in range(1, 5001):
+for i in range(1, 11):
     id_str = str(i).zfill(4)
     json_data = json.dumps({id_str: {"day1": False, "day2": False}})
     encrypted_data = encrypt(json_data, encryption_key, iv)
