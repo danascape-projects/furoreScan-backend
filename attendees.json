@@ -1,10 +1,11 @@
 {
-  "123": {
-    "day1": false,
-    "day2": false
-  },
-  "23": {
-    "day1": false,
-    "day2": false
-  }
+  "attendees":
+  [
+    {
+      "ID": "0001",
+      "day1": "true",
+      "day2": "false",
+      "special": "false"
+    }
+  ]
 }

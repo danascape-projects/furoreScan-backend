@@ -5,6 +5,7 @@ from Crypto.Util.Padding import pad
 from Crypto.Random import get_random_bytes
 import qrcode
 from fpdf import FPDF
+import os
 
 # Encryption key (must be 16, 24, or 32 bytes long)
 encryption_key = b'ada7327441e9876aaa5f19d8262c9482'[:16]  # Ensure it's 16 bytes for AES-128
@@ -62,6 +63,8 @@ for i in range(1, 2001):
     pdf.set_y(160)
     pdf.set_font('Arial', 'B', 12)
     pdf.cell(0, 10, f'ID: {id_str}', 0, 1, 'C')
+
+    os.remove(qr_code_path)
 
 # Save PDF to file
 pdf_path = "encrypted_qrs.pdf"
