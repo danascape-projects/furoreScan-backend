@@ -24,27 +24,30 @@ async def check_in(attendee_id: str):
         if attendees[attendee_id].get('day1', False) and attendees[attendee_id].get('day2', False):
             return {'detail': False, 'message': 'Attendee has already attended', 'attendee': attendee_id}
 
-        if current_date == datetime(2024, 5, 14).date():
+        if current_date == datetime(2024, 6, 13).date():
             if not attendees[attendee_id].get('day1', False):
                 attendees[attendee_id]['day1'] = True
 
-            with open("attendees.json", "w") as file:
-                json.dump(attendees, file, indent=2)
+                with open("attendees.json", "w") as file:
+                    json.dump(attendees, file, indent=2)
             
-            return {'detail': True, 'message': 'day1', 'attendee': attendee_id}
+                return {'detail': True, 'message': 'day1', 'attendee': attendee_id}
 
         else:
             return {'detail': True, 'message': 'Check-in for day1 not allowed', 'attendee': attendee_id}
 
 
-        if not attendees[attendee_id].get('day2', False):
-            attendees[attendee_id]['day2'] = True
+        if current_date == datetime(2024, 6, 14).date():
+            if not attendees[attendee_id].get('day2', False):
+                attendees[attendee_id]['day2'] = True
 
-            with open("attendees.json", "w") as file:
-                json.dump(attendees, file, indent=2)
+                with open("attendees.json", "w") as file:
+                    json.dump(attendees, file, indent=2)
 
-            return {'detail': True, 'message': 'day2', 'attendee': attendee_id}
+                return {'detail': True, 'message': 'day2', 'attendee': attendee_id}
 
+        else:
+            return {'detail': True, 'message': 'Check-in for day2 not allowed', 'attendee': attendee_id}
 
         # return {'success': True, 'message': 'Check-in successful for day1 and day2', 'attendee': attendees[attendee_id]}
     else:
