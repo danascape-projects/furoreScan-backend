@@ -44,7 +44,7 @@ pdf.cell(0, 10, 'QR Codes for Encrypted JSON Data', 0, 1, 'C')
 json_list = []
 
 # Loop to create JSON entries, encrypt, generate QR code, and add to PDF
-for i in range(1, 2001):
+for i in range(2001, 4001):
     id_str = str(i).zfill(4)
     json_data = json.dumps({
         "ID": id_str,
@@ -67,11 +67,11 @@ for i in range(1, 2001):
     os.remove(qr_code_path)
 
 # Save PDF to file
-pdf_path = "encrypted_qrs.pdf"
+pdf_path = "encrypted_qrs2.pdf"
 pdf.output(pdf_path)
 
 # Save JSON list to file
-json_list_path = "json_list.json"
+json_list_path = "json_list2.json"
 with open(json_list_path, 'w') as json_file:
     json.dump(json_list, json_file, indent=4)
 
