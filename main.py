@@ -33,8 +33,7 @@ async def check_in(attendee_id: str):
             
                 return {'detail': True, 'message': 'day1', 'attendee': attendee_id}
 
-        else:
-            return {'detail': True, 'message': 'Check-in for day1 not allowed', 'attendee': attendee_id}
+            return {'detail': False, 'message': 'Already checked in for day1', 'attendee': attendee_id}
 
 
         if current_date == datetime(2024, 6, 14).date():
@@ -46,9 +45,9 @@ async def check_in(attendee_id: str):
 
                 return {'detail': True, 'message': 'day2', 'attendee': attendee_id}
 
-        else:
-            return {'detail': True, 'message': 'Check-in for day2 not allowed', 'attendee': attendee_id}
+            return {'detail': False, 'message': 'Already checked in for day2', 'attendee': attendee_id}
 
-        # return {'success': True, 'message': 'Check-in successful for day1 and day2', 'attendee': attendees[attendee_id]}
+        return {'detail': False, 'message': 'Check-in not allowed on this date', 'attendee': attendee_id}
+
     else:
         raise HTTPException(status_code=404, detail='Attendee not found') 
