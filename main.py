@@ -45,7 +45,7 @@ async def check_in(attendee_id: str):
 
                 return {'detail': True, 'message': 'day2', 'attendee': attendee_id}
 
-            return {'detail': False, 'message': 'Already checked in for day2', 'attendee': attendee_id}
+            return {'detail': False, 'message': 'Already', 'attendee': attendee_id}
 
         return {'detail': False, 'message': 'Check-in not allowed on this date', 'attendee': attendee_id}
 
