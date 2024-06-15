@@ -15,5 +15,5 @@ def save_to_file(filename: str, data: dict):
 attendees = generate_attendees(1, 5000)
 
 # Save the attendees to a JSON file
-save_to_file("attendees1.json", attendees)
+save_to_file("attendees.json", attendees)
 

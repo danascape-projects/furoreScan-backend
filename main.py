@@ -6,7 +6,7 @@ from datetime import datetime
 app = FastAPI()
 
 try:
-    with open("attendees1.json", "r") as file:
+    with open("attendees.json", "r") as file:
         attendees = json.load(file)
 except FileNotFoundError:
     attendees = {}
@@ -24,7 +24,7 @@ async def check_in(attendee_id: str):
         if attendees[attendee_id].get('day1', False) and attendees[attendee_id].get('day2', False):
             return {'detail': False, 'message': 'Attendee has already attended', 'attendee': attendee_id}
 
-        if current_date == datetime(2024, 6, 13).date():
+        if current_date == datetime(2024, 6, 14).date():
             if not attendees[attendee_id].get('day1', False):
                 attendees[attendee_id]['day1'] = True
 
@@ -36,7 +36,7 @@ async def check_in(attendee_id: str):
             return {'detail': False, 'message': 'Already checked in for day1', 'attendee': attendee_id}
 
 
-        if current_date == datetime(2024, 6, 14).date():
+        if current_date == datetime(2024, 6, 15).date():
             if not attendees[attendee_id].get('day2', False):
                 attendees[attendee_id]['day2'] = True
 
